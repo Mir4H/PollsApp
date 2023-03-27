@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33502.453
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PollAPI", "PollAPI\PollAPI.csproj", "{87963E40-67B7-49B7-AC98-1746C9C14AD5}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "PollsDB", "PollsDB\PollsDB.sqlproj", "{6F4D6643-8FD6-40B8-8F52-1C2052F8C572}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{87963E40-67B7-49B7-AC98-1746C9C14AD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87963E40-67B7-49B7-AC98-1746C9C14AD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87963E40-67B7-49B7-AC98-1746C9C14AD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87963E40-67B7-49B7-AC98-1746C9C14AD5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F4D6643-8FD6-40B8-8F52-1C2052F8C572}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F4D6643-8FD6-40B8-8F52-1C2052F8C572}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F4D6643-8FD6-40B8-8F52-1C2052F8C572}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{6F4D6643-8FD6-40B8-8F52-1C2052F8C572}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F4D6643-8FD6-40B8-8F52-1C2052F8C572}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F4D6643-8FD6-40B8-8F52-1C2052F8C572}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {40EF6A06-9B4F-48EA-BD89-997CE052F467}
+	EndGlobalSection
+EndGlobal

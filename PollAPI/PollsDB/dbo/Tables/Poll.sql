@@ -1,0 +1,6 @@
+﻿CREATE TABLE [dbo].[Poll]
+(
+	[Poll_id] INT NOT NULL PRIMARY KEY IDENTITY, 
+    [Title] NVARCHAR(255) NOT NULL, 
+    [Created_at] DATETIME NULL DEFAULT GETDATE()
+)
