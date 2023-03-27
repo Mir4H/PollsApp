@@ -2,14 +2,14 @@ import React from 'react'
 import './App.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Layout from './components/Layout'
-import Polls from './components/Polls'
+import Poll from './components/Poll'
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route path="/" element={<Polls />} />
+          <Route path="/" element={<Poll />} />
         </Route>
       </Routes>
     </BrowserRouter>
