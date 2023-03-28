@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[spChoice_update]
+﻿CREATE PROCEDURE [dbo].[spChoice_Update]
 	@Id int,
 	@Votes int
 AS

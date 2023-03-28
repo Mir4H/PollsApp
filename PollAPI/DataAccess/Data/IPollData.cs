@@ -10,5 +10,6 @@ namespace DataAccess.Data
         Task InsertChoice(ChoiceModel choice);
         Task<int> InsertPoll(PollModel poll);
         Task UpdateChoice(ChoiceModel choice);
+        Task DeletePoll(int id);
     }
 }

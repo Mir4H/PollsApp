@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[spChoice_insert]
+﻿CREATE PROCEDURE [dbo].[spChoice_Insert]
 	@Text nvarchar(50),
 	@Poll_id int
 AS

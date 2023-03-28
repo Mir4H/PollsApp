@@ -57,12 +57,6 @@ const Poll = () => {
     900: 1
   }
 
-  const handleClickAway = () => {
-    setOpenResults(-1)
-    setOpenPoll(-1)
-    setAnswers([])
-  }
-
   const handleClick = (i: number, select: string) => {
     select === 'results' ? setOpenResults(i) : setOpenPoll(i)
   }
@@ -142,52 +136,39 @@ const Poll = () => {
               />
             </div>
             <Collapse in={openResults === index} timeout="auto" unmountOnExit>
-              <ClickAwayListener onClickAway={handleClickAway}>
-                <>
-                  <CardContent
-                    onClick={(e) => {
-                      e.stopPropagation()
-                      handleClick(index, 'results')
-                    }}
-                  >
-                    <ShowResults answers={answers} index={index} />
-                  </CardContent>
-                  <CardActions>
-                    <PollsButton
-                      text={'Answer poll'}
-                      func={() => showResult(index)}
-                      disabled={false}
-                    />
-                    <PollsButton text={'Close'} func={close} disabled={false} />
-                  </CardActions>
-                </>
-              </ClickAwayListener>
+              <CardContent
+                onClick={(e) => {
+                  e.stopPropagation()
+                  handleClick(index, 'results')
+                }}
+              >
+                <ShowResults answers={answers} index={index} />
+              </CardContent>
+              <CardActions>
+                <PollsButton text={'Answer poll'} func={() => showResult(index)}/>
+                <PollsButton text={'Close'} func={close}/>
+              </CardActions>
             </Collapse>
             <Collapse in={openPoll === index} timeout="auto" unmountOnExit>
-              <ClickAwayListener onClickAway={handleClickAway}>
-                <>
-                  <CardContent
-                    onClick={(e) => {
-                      e.stopPropagation()
-                      handleClick(index, 'poll')
-                    }}
-                  >
-                    <ShowOptions answers={answers} setAnswer={setAnswer} />
-                  </CardContent>
-                  <CardActions>
-                    <PollsButton
-                      text={'Confirm selection'}
-                      func={() => submitAnswer(index, poll.poll_id)}
-                      disabled={answer === ''}
-                    />
-                    <PollsButton
-                      text={'Show Results'}
-                      func={() => showResult(index)}
-                      disabled={false}
-                    />
-                  </CardActions>
-                </>
-              </ClickAwayListener>
+              <CardContent
+                onClick={(e) => {
+                  e.stopPropagation()
+                  handleClick(index, 'poll')
+                }}
+              >
+                <ShowOptions answers={answers} setAnswer={setAnswer} />
+              </CardContent>
+              <CardActions>
+                <PollsButton
+                  text={'Confirm selection'}
+                  func={() => submitAnswer(index, poll.poll_id)}
+                  disabled={answer === ''}
+                />
+                <PollsButton
+                  text={'Show Results'}
+                  func={() => showResult(index)}
+                />
+              </CardActions>
             </Collapse>
           </Card>
         </div>

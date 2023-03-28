@@ -66,14 +66,12 @@
     <Build Include="dbo\StoredProcedures\spPoll_Get.sql" />
     <Build Include="dbo\StoredProcedures\spPoll_GetAll.sql" />
     <Build Include="dbo\StoredProcedures\spPoll_Insert.sql" />
-    <Build Include="dbo\StoredProcedures\spChoice_update.sql" />
-    <Build Include="dbo\StoredProcedures\spChoice_insert.sql" />
+    <Build Include="dbo\StoredProcedures\spChoice_Update.sql" />
+    <Build Include="dbo\StoredProcedures\spChoice_Insert.sql" />
     <Build Include="dbo\StoredProcedures\spChoice_getByPoll.sql" />
+    <Build Include="dbo\StoredProcedures\spPoll_Delete.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Script.PostDeployment.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="PollsDB.publish.xml" />
   </ItemGroup>
 </Project>

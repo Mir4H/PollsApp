@@ -12,6 +12,7 @@ namespace PollAPI
             app.MapGet("/Choices/{id}", GetChoices);
             app.MapPost("/Choices", InsertChoice);
             app.MapPut("/Choices", UpdateChoice);
+            app.MapDelete("/Polls/{id}", DeletePoll);
         }
 
         private static async Task<IResult> GetPolls(IPollData data)
@@ -94,6 +95,19 @@ namespace PollAPI
                 return Results.Problem(ex.Message);
             }
 
+        }
+
+        private static async Task<IResult> DeletePoll(int id, IPollData data)
+        {
+            try
+            {
+                await data.DeletePoll(id);
+                return Results.Ok();
+            }
+            catch (Exception ex)
+            {
+                return Results.Problem(ex.Message);
+            }
         }
     }
 }

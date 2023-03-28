@@ -5,8 +5,8 @@ import {
 
 interface Props {
     text: string, 
-    func: () => void,
-    disabled: boolean
+    func?: () => void,
+    disabled?: boolean,
   }
 
 const PollsButton = ({text, func, disabled}: Props) => {

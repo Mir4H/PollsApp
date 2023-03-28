@@ -15,7 +15,8 @@ export const apiEndpoint = (endpoint: string) => {
   return {
     fetch: () => axios.get(url),
     fetchById: (id: number) => axios.get(url + id),
-    post: (newRecord: object) => axios.post(url, newRecord),
-    put: (updatedRecord: string) => axios.put(url, updatedRecord)
+    post: (newRecord: string) => axios.post(url, newRecord),
+    put: (updatedRecord: string) => axios.put(url, updatedRecord),
+    delete: (id: number) => axios.delete(url + id)
   }
 }
