@@ -105,6 +105,7 @@ const ChoiceForm = () => {
                       </Typography>
                       <Form>
                         <TextField
+                          id="option1"
                           error={Boolean(touched.option1 && errors.option1)}
                           fullWidth
                           required
@@ -119,6 +120,7 @@ const ChoiceForm = () => {
                           margin="dense"
                         />
                         <TextField
+                          id="option2"
                           error={Boolean(touched.option2 && errors.option2)}
                           fullWidth
                           required
@@ -172,6 +174,7 @@ const ChoiceForm = () => {
                           margin="dense"
                         />
                         <Button
+                          id="submitchoices"
                           type="submit"
                           variant="outlined"
                           size="large"
@@ -188,6 +191,7 @@ const ChoiceForm = () => {
                           Submit
                         </Button>
                         <Button
+                          id="cancelForm"
                           type="button"
                           onClick={cancelAdd}
                           variant="outlined"

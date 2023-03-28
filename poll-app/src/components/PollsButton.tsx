@@ -4,14 +4,16 @@ import {
   import theme from '../theme'
 
 interface Props {
+    id?: string,
     text: string, 
     func?: () => void,
     disabled?: boolean,
   }
 
-const PollsButton = ({text, func, disabled}: Props) => {
+const PollsButton = ({id, text, func, disabled}: Props) => {
   return (
     <Button
+      id={id}
       onClick={func}
       variant="outlined"
       size="small"

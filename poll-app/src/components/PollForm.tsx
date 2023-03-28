@@ -57,6 +57,7 @@ const PollForm = () => {
                   required
                   helperText={touched.poll && errors.poll}
                   label="Poll to insert"
+                  id="poll"
                   name="poll"
                   onBlur={handleBlur}
                   onChange={handleChange}
@@ -66,12 +67,13 @@ const PollForm = () => {
                   margin="dense"
                 />
                 <Button
+                  id="submit"
                   type="submit"
                   variant="outlined"
                   size="large"
                   sx={{
-                    mr:1,
-                    mt:1,
+                    mr: 1,
+                    mt: 1,
                     color: theme.colors.secondary,
                     '&:hover': {
                       backgroundColor: theme.colors.secondary,
@@ -87,8 +89,8 @@ const PollForm = () => {
                   variant="outlined"
                   size="large"
                   sx={{
-                    mr:1,
-                    mt:1,
+                    mr: 1,
+                    mt: 1,
                     color: theme.colors.secondary,
                     '&:hover': {
                       backgroundColor: theme.colors.secondary,

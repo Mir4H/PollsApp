@@ -3,7 +3,7 @@ import {
   CardContent,
   Collapse,
   CardHeader,
-  ClickAwayListener,
+  Button,
   CardActions
 } from '@mui/material'
 import { useEffect, useState } from 'react'
@@ -14,6 +14,7 @@ import theme from '../theme'
 import ShowResults from './ShowResults'
 import ShowOptions from './ShowOptions'
 import PollsButton from './PollsButton'
+import { useParams } from 'react-router-dom'
 
 interface Polls {
   poll_id: number
@@ -49,6 +50,7 @@ const Poll = () => {
       .catch((err) => {
         console.log(err)
       })
+      .finally()
   }, [])
 
   const breakpoints = {
@@ -82,7 +84,6 @@ const Poll = () => {
       .fetchById(id)
       .then((res) => {
         setAnswers(res.data)
-        console.log(res.data)
       })
       .catch((err) => {
         console.log(err)
@@ -106,74 +107,72 @@ const Poll = () => {
   }
 
   return polls.length !== 0 ? (
-    <Masonry
-      breakpointCols={breakpoints}
-      className="my-masonry-grid"
-      columnClassName="my-masonry-grid_column"
-    >
-      {polls.map((poll, index) => (
-        <div key={poll.poll_id}>
-          <Card
-            sx={{
-              borderLeft: 2,
-              borderColor: theme.colors.attention,
-              p: 2,
-              borderRadius: 2,
-              '&:hover':
-                openResults === index || openPoll === index
-                  ? null
-                  : {
-                      backgroundColor: theme.colors.attention,
-                      color: theme.colors.white
-                    }
-            }}
-          >
-            <div style={clickStyle} onClick={() => answerPoll(poll.poll_id, index)}>
-              <CardHeader
-                titleTypographyProps={{ variant: 'h5' }}
-                title={poll.title}
-                subheader={dayjs(poll.created_at).format('DD.MM.YYYY')}
-              />
-            </div>
-            <Collapse in={openResults === index} timeout="auto" unmountOnExit>
-              <CardContent
-                onClick={(e) => {
-                  e.stopPropagation()
-                  handleClick(index, 'results')
-                }}
-              >
-                <ShowResults answers={answers} index={index} />
-              </CardContent>
-              <CardActions>
-                <PollsButton text={'Answer poll'} func={() => showResult(index)}/>
-                <PollsButton text={'Close'} func={close}/>
-              </CardActions>
-            </Collapse>
-            <Collapse in={openPoll === index} timeout="auto" unmountOnExit>
-              <CardContent
-                onClick={(e) => {
-                  e.stopPropagation()
-                  handleClick(index, 'poll')
-                }}
-              >
-                <ShowOptions answers={answers} setAnswer={setAnswer} />
-              </CardContent>
-              <CardActions>
-                <PollsButton
-                  text={'Confirm selection'}
-                  func={() => submitAnswer(index, poll.poll_id)}
-                  disabled={answer === ''}
+      <Masonry
+        breakpointCols={breakpoints}
+        className="my-masonry-grid"
+        columnClassName="my-masonry-grid_column"
+      >
+        {polls.map((poll, index) => (
+          <div key={poll.poll_id}>
+            <Card
+              sx={{
+                borderLeft: 2,
+                borderColor: theme.colors.attention,
+                p: 2,
+                borderRadius: 2,
+                '&:hover':
+                  openResults === index || openPoll === index
+                    ? null
+                    : {
+                        backgroundColor: theme.colors.attention,
+                        color: theme.colors.white
+                      }
+              }}
+            >
+              <div style={clickStyle} onClick={() => answerPoll(poll.poll_id, index)}>
+                <CardHeader
+                  titleTypographyProps={{ variant: 'h5' }}
+                  title={poll.title}
+                  subheader={dayjs(poll.created_at).format('DD.MM.YYYY')}
                 />
-                <PollsButton
-                  text={'Show Results'}
-                  func={() => showResult(index)}
-                />
-              </CardActions>
-            </Collapse>
-          </Card>
-        </div>
-      ))}
-    </Masonry>
+              </div>
+              <Collapse in={openResults === index} timeout="auto" unmountOnExit>
+                <CardContent
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    handleClick(index, 'results')
+                  }}
+                >
+                  <ShowResults answers={answers} index={index} />
+                </CardContent>
+                <CardActions>
+                  <PollsButton id="answer" text={'Answer poll'} func={() => showResult(index)} />
+                  <PollsButton text={'Close'} func={close} />
+                </CardActions>
+              </Collapse>
+              <Collapse in={openPoll === index} timeout="auto" unmountOnExit>
+                <CardContent
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    handleClick(index, 'poll')
+                  }}
+                >
+                  <ShowOptions answers={answers} setAnswer={setAnswer} />
+                </CardContent>
+                <CardActions>
+                  <PollsButton
+                    id="confirm"
+                    text={'Confirm selection'}
+                    func={() => submitAnswer(index, poll.poll_id)}
+                    disabled={answer === ''}
+                  />
+                  <PollsButton id="results" text={'Show Results'} func={() => showResult(index)} />
+                </CardActions>
+              </Collapse>
+            </Card>
+          </div>
+        ))}
+      </Masonry>
   ) : null
 }
 

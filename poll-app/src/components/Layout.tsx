@@ -1,11 +1,12 @@
-import { Card, AppBar, Button, Container, Toolbar, Typography, Alert } from '@mui/material'
+import { Card, AppBar, Button, Container, Toolbar, Typography } from '@mui/material'
 import { Outlet } from 'react-router-dom'
 import theme from '../theme'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { Link, useParams } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import { useState } from 'react'
 
 const linkStyle = {
-  textDecoration: "none",
+  textDecoration: 'none',
   color: theme.colors.white,
   flexGrow: 1
 }
@@ -13,7 +14,6 @@ const linkStyle = {
 const Layout = () => {
   const location = useLocation()
   const navigate = useNavigate()
-  const success = useParams()
   console.log(location.pathname)
 
   return (
@@ -22,9 +22,9 @@ const Layout = () => {
         <AppBar position="sticky">
           <Toolbar sx={{ bgcolor: theme.colors.primary }}>
             <Link style={linkStyle} to={'/'}>
-            <Typography variant="h4" component="div">
-              Polls
-            </Typography>
+              <Typography variant="h4" component="div">
+                Polls
+              </Typography>
             </Link>
             {location.pathname === '/create' ? null : (
               <Button

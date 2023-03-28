@@ -29,6 +29,7 @@ const ShowOptions = ({ answers, setAnswer }: Props) => {
         >
           {answers.map((item, i) => (
             <FormControlLabel
+              id={item.text}
               key={item.choice_id}
               value={`{"choice_id": ${item.choice_id}, "votes": ${item.votes + 1}}`}
               control={<Radio onChange={onOptionChange} />}
