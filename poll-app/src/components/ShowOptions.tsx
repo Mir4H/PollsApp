@@ -9,7 +9,7 @@ import { SOProps } from '../types'
 
 const ShowOptions = ({ answers, setAnswer }: SOProps) => {
   const onOptionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setAnswer(e.target.value)
+    setAnswer(Number(e.target.value))
   }
 
   return (
@@ -25,7 +25,7 @@ const ShowOptions = ({ answers, setAnswer }: SOProps) => {
             <FormControlLabel
               id={item.text}
               key={item.choice_id}
-              value={`{"choice_id": ${item.choice_id}, "votes": ${item.votes + 1}}`}
+              value={item.choice_id}
               control={<Radio onChange={onOptionChange} />}
               label={<Typography sx={{ wordBreak: "break-word" }}>{item.text}
             </Typography>}

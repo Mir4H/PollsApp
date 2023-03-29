@@ -24,7 +24,7 @@ export interface PBProps {
 
 export interface SOProps {
   answers: IAnswers[]
-  setAnswer: (value: string) => void
+  setAnswer: (value: number) => void
 }
 
 export interface FormvaluesCF {

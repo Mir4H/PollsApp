@@ -15,7 +15,7 @@ const Poll = () => {
   const [openResults, setOpenResults] = useState<number>(-1)
   const [openPoll, setOpenPoll] = useState<number>(-1)
   const [answers, setAnswers] = useState<IAnswers[]>([])
-  const [answer, setAnswer] = useState<string>('')
+  const [answer, setAnswer] = useState<number>(-1)
 
   useEffect(() => {
     apiEndpoint(ENDPOINTS.polls)
@@ -29,12 +29,14 @@ const Poll = () => {
   }, [])
 
   const submitAnswer = (id: number, i: number) => {
-    apiEndpoint(ENDPOINTS.choices)
-      .put(JSON.parse(answer))
+    const votes = Number(answers.find(a => a.choice_id === answer)?.votes)+1
+    apiEndpoint(ENDPOINTS.polls)
+      .put(i, answer, JSON.parse(`{"votes": "${votes}"}`))
       .then((res) => {
+        console.log(res.data)
         setAnswers(res.data.choices)
         setOpenPoll(-1)
-        setAnswer('')
+        setAnswer(-1)
       })
       .catch((err) => {
         console.log(err)
@@ -116,7 +118,7 @@ const Poll = () => {
                   id="confirm"
                   text={'Confirm selection'}
                   func={() => submitAnswer(index, poll.poll_id)}
-                  disabled={answer === ''}
+                  disabled={answer === -1}
                 />
                 <PollsButton id="results" text={'Show Results'} func={() => showResult(index)} />
               </CardActions>
@@ -129,3 +131,4 @@ const Poll = () => {
 }
 
 export default Poll
+
