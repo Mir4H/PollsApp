@@ -9,7 +9,7 @@ namespace DataAccess.Data
         Task<IEnumerable<PollModel>> GetPolls();
         Task InsertChoice(ChoiceModel choice);
         Task<int> InsertPoll(PollModel poll);
-        Task<int> UpdateChoice(ChoiceModel choice);
+        Task UpdateChoice(int id, ChoiceModel choice);
         Task DeletePoll(int id);
     }
 }

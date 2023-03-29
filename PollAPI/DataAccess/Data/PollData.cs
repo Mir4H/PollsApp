@@ -47,11 +47,8 @@ namespace DataAccess.Data
         public Task InsertChoice(ChoiceModel choice) =>
             _db.SaveData("dbo.spChoice_Insert", new { choice.Text, choice.Poll_id });
 
-        public Task<int> UpdateChoice(ChoiceModel choice)
-        {
-            var result = _db.GetId("dbo.spChoice_Update", new { Id = choice.Choice_id, choice.Votes });
-            return result;
-        }
+        public Task UpdateChoice(int id, ChoiceModel choice) =>
+            _db.SaveData("dbo.spChoice_Update", new { id, choice.Votes });
 
         public Task DeletePoll(int id) =>
             _db.SaveData("dbo.spPoll_Delete", new { Id = id });

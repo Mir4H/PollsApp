@@ -11,7 +11,7 @@ namespace PollAPI
             app.MapGet("/Polls/{id}", GetPoll);
             app.MapPost("/Polls", InsertPoll);
             app.MapPost("/Choices", InsertChoice);
-            app.MapPut("/Choices", UpdateChoice);
+            app.MapPut("/Polls/{id}/vote/{id2}", UpdateChoice);
             app.MapDelete("/Polls/{id}", DeletePoll);
         }
 
@@ -42,11 +42,12 @@ namespace PollAPI
             }
         }
 
-        private static async Task<IResult> InsertPoll(PollModel poll, IPollData data)
+        private static async Task<IResult> InsertPoll(PollModel poll, IEnumerable<ChoiceModel> votes, IPollData data)
         {
             try
             {
                 var id = await data.InsertPoll(poll);
+
                 return Results.Ok(id);
             }
             catch (Exception ex)
@@ -68,13 +69,13 @@ namespace PollAPI
             }
         }
 
-        private static async Task<IResult> UpdateChoice(ChoiceModel choice, IPollData data)
+        private static async Task<IResult> UpdateChoice(int id, int id2, ChoiceModel choice, IPollData data)
         {
             try
             {
-                var id = await data.UpdateChoice(choice);
-                var results = await data.GetPoll(id);
-                return Results.Ok(results);
+                await data.UpdateChoice(id2, choice);
+                var result = await data.GetPoll(id);
+                return Results.Ok(result);
             }
             catch (Exception ex)
             {
