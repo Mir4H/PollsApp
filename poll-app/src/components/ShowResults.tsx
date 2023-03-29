@@ -1,24 +1,8 @@
-import {
-  Typography,
-  List,
-  ListItem,
-  ListItemText,
-  LinearProgress
-} from '@mui/material'
-import { Answers } from './Poll'
+import { Typography, List, ListItem, ListItemText, LinearProgress } from '@mui/material'
+import { getPercentage, sumVotes } from '../helpers'
+import { IAnswers } from '../types'
 
-const ShowResults = ({ answers, index }: { answers: Answers[]; index: number }) => {
-  const sumVotes = (answers: Answers[]): number => {
-    const sum = answers.reduce((accumulator, currentValue) => accumulator + currentValue.votes, 0)
-    return sum
-  }
-
-  const getPercentage = (i: number): number => {
-    const sum = sumVotes(answers)
-    const result: number = (answers[i].votes / sum) * 100
-    return Number((Number.isNaN(result) ? 0 : result).toFixed(2))
-  }
-
+const ShowResults = ({ answers }: { answers: IAnswers[] }) => {
   return (
     <>
       <Typography paragraph>This poll has {sumVotes(answers)} answers, the results are:</Typography>
@@ -28,10 +12,11 @@ const ShowResults = ({ answers, index }: { answers: Answers[]; index: number }) 
             <ListItemText
               primary={
                 <>
-                  <Typography>{item.text}</Typography>
-                  <LinearProgress variant="determinate" value={getPercentage(i)} />
+                  <Typography sx={{ wordBreak: 'break-word' }}>{item.text}</Typography>
+                  <LinearProgress variant="determinate" value={getPercentage(i, answers)} />
                   <Typography variant="body2" color="text.secondary">{`${getPercentage(
-                    i
+                    i,
+                    answers
                   )}%`}</Typography>
                 </>
               }

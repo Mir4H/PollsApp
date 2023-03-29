@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from 'react'
-import { Formik, Form, Field } from 'formik'
+import { useState } from 'react'
+import { Formik, Form } from 'formik'
 import { Button, TextField, Typography, Box, Alert, CircularProgress } from '@mui/material'
 import * as Yup from 'yup'
 import { apiEndpoint, ENDPOINTS } from '../api'
 import { useNavigate, useParams } from 'react-router-dom'
 import theme from '../theme'
-import { useField } from 'formik'
-import PollsButton from './PollsButton'
 
 interface Formvalues {
   option1: string
@@ -94,14 +92,14 @@ const ChoiceForm = () => {
                   {success ? (
                     <Box display="flex" flexDirection="column" alignItems="center">
                       <Alert variant="outlined" severity="success" sx={{ m: 3 }}>
-                        {`New Poll ${poll} added successfully`}
+                        <Typography sx={{ wordBreak: 'break-word' }}>{`New Poll ${poll} added successfully`}</Typography>
                       </Alert>
                       <CircularProgress color="success" />
                     </Box>
                   ) : (
                     <>
-                      <Typography variant="h4" sx={{ pb: 2 }}>
-                        Choose options for poll: {poll}
+                      <Typography variant="h4" sx={{ pb: 2, wordBreak: 'break-word' }}>
+                        Choose options for the poll: {poll}
                       </Typography>
                       <Form>
                         <TextField

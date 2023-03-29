@@ -1,8 +1,6 @@
 import axios from 'axios'
-type Endpoints = {
-  polls: string
-  choices: string
-}
+import { Endpoints } from '../types'
+
 export const BASE_URL: string = 'https://localhost:7120'
 
 export const ENDPOINTS: Endpoints = {

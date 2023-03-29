@@ -3,7 +3,6 @@ import { Outlet } from 'react-router-dom'
 import theme from '../theme'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
-import { useState } from 'react'
 
 const linkStyle = {
   textDecoration: 'none',

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 
 namespace PollAPI
 {
@@ -9,7 +10,6 @@ namespace PollAPI
             app.MapGet("/Polls", GetPolls);
             app.MapGet("/Polls/{id}", GetPoll);
             app.MapPost("/Polls", InsertPoll);
-            app.MapGet("/Choices/{id}", GetChoices);
             app.MapPost("/Choices", InsertChoice);
             app.MapPut("/Choices", UpdateChoice);
             app.MapDelete("/Polls/{id}", DeletePoll);
@@ -19,23 +19,8 @@ namespace PollAPI
         {
             try
             {
-                return Results.Ok(await data.GetPolls());
-
-            }
-            catch (Exception ex)
-            {
-                return Results.Problem(ex.Message);
-            }
-        }
-
-        private static async Task<IResult> GetChoices(int id, IPollData data)
-        {
-            try
-            {
-                var results = await data.GetChoices(id);
-                if (results == null) return Results.NotFound();
+                var results = await data.GetPolls();
                 return Results.Ok(results);
-
             }
             catch (Exception ex)
             {
@@ -87,8 +72,9 @@ namespace PollAPI
         {
             try
             {
-                await data.UpdateChoice(choice);
-                return Results.Ok();
+                var id = await data.UpdateChoice(choice);
+                var results = await data.GetPoll(id);
+                return Results.Ok(results);
             }
             catch (Exception ex)
             {

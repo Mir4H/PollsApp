@@ -13,4 +13,5 @@ namespace DataAccess.Models
         public int Votes { get; set; } = 0;
         public int Poll_id { get; set; }
     }
+
 }

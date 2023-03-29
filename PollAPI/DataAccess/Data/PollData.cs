@@ -20,33 +20,38 @@ namespace DataAccess.Data
         public Task<IEnumerable<PollModel>> GetPolls() =>
             _db.LoadData<PollModel, dynamic>("dbo.spPoll_GetAll", new { });
 
+
         public async Task<PollModel?> GetPoll(int id)
         {
             var results = await _db.LoadData<PollModel, dynamic>(
                 "dbo.spPoll_Get",
                 new { Id = id });
+            var choices = await _db.LoadData<ChoiceModel, dynamic>(
+               "dbo.spChoice_getByPoll",
+               new { Id = id });
+
+            foreach (var result in results)
+            {
+                result.Choices = choices.Where(a => a.Poll_id == result.Poll_id).ToList();
+            }
+
             return results.FirstOrDefault();
         }
 
-        public Task<int> InsertPoll(PollModel poll)
+        public async Task<int> InsertPoll(PollModel poll)
         {
-            var results = _db.GetId("dbo.spPoll_Insert", new { poll.Title });
-            return results;
-        }
-
-        public async Task<List<ChoiceModel>> GetChoices(int id)
-        {
-            var results = await _db.LoadData<ChoiceModel, dynamic>(
-                "dbo.spChoice_getByPoll",
-                new { Id = id });
-            return results.ToList();
+            var result = await _db.GetId("dbo.spPoll_Insert", new { poll.Title });
+            return result;
         }
 
         public Task InsertChoice(ChoiceModel choice) =>
-             _db.SaveData("dbo.spChoice_Insert", new { choice.Text, choice.Poll_id });
+            _db.SaveData("dbo.spChoice_Insert", new { choice.Text, choice.Poll_id });
 
-        public Task UpdateChoice(ChoiceModel choice) =>
-            _db.SaveData("dbo.spChoice_Update", new { Id = choice.Choice_id, choice.Votes });
+        public Task<int> UpdateChoice(ChoiceModel choice)
+        {
+            var result = _db.GetId("dbo.spChoice_Update", new { Id = choice.Choice_id, choice.Votes });
+            return result;
+        }
 
         public Task DeletePoll(int id) =>
             _db.SaveData("dbo.spPoll_Delete", new { Id = id });

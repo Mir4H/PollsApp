@@ -1,20 +1,15 @@
-import React, { useEffect, useState } from 'react'
-import { Formik, Form, Field } from 'formik'
+import { Formik, Form } from 'formik'
 import { Button, TextField, Typography, Box } from '@mui/material'
 import * as Yup from 'yup'
 import { apiEndpoint, ENDPOINTS } from '../api'
 import { useNavigate } from 'react-router-dom'
 import theme from '../theme'
-import { useField } from 'formik'
-import PollsButton from './PollsButton'
-interface Formvalues {
-  poll: string
-}
+import { FormvaluesPF } from '../types'
 
 const PollForm = () => {
   const navigate = useNavigate()
 
-  const submitForm = (values: Formvalues) => {
+  const submitForm = (values: FormvaluesPF) => {
     apiEndpoint(ENDPOINTS.polls)
       .post(JSON.parse(`{"title": "${values.poll}"}`))
       .then((res) => {
@@ -31,7 +26,7 @@ const PollForm = () => {
       validationSchema={Yup.object({
         poll: Yup.string()
           .required('This field is required')
-          .max(255, 'The maximum number of characters is 255')
+          .max(50, 'The maximum number of characters is 50')
       })}
       onSubmit={(values) => submitForm(values)}
     >

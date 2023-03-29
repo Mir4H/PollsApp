@@ -2,15 +2,9 @@ import {
     Button
   } from '@mui/material'
   import theme from '../theme'
+import { PBProps } from '../types'
 
-interface Props {
-    id?: string,
-    text: string, 
-    func?: () => void,
-    disabled?: boolean,
-  }
-
-const PollsButton = ({id, text, func, disabled}: Props) => {
+const PollsButton = ({id, text, func, disabled}: PBProps) => {
   return (
     <Button
       id={id}

@@ -5,17 +5,11 @@ import {
   FormControlLabel,
   Radio
 } from '@mui/material'
-import { Answers } from './Poll'
+import { SOProps } from '../types'
 
-interface Props {
-  answers: Answers[],
-  setAnswer: (value: string) => void,
-}
-
-const ShowOptions = ({ answers, setAnswer }: Props) => {
+const ShowOptions = ({ answers, setAnswer }: SOProps) => {
   const onOptionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAnswer(e.target.value)
-    console.log(e.target.value)
   }
 
   return (
@@ -33,7 +27,8 @@ const ShowOptions = ({ answers, setAnswer }: Props) => {
               key={item.choice_id}
               value={`{"choice_id": ${item.choice_id}, "votes": ${item.votes + 1}}`}
               control={<Radio onChange={onOptionChange} />}
-              label={item.text}
+              label={<Typography sx={{ wordBreak: "break-word" }}>{item.text}
+            </Typography>}
             />
           ))}
         </RadioGroup>

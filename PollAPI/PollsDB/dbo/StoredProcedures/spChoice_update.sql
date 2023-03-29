@@ -3,5 +3,5 @@
 	@Votes int
 AS
 begin
-	UPDATE dbo.[Choice] SET Votes = @Votes WHERE Choice_id = @Id;
+	UPDATE dbo.[Choice] SET Votes = @Votes OUTPUT inserted.Poll_id WHERE Choice_id = @Id;
 end
