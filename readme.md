@@ -1,6 +1,6 @@
 # Polls Web App
 
-This is a simple web poll application where users can vote and create polls. The Backend is built with .NET Core Web API, using Dapper, SQL Server database and Minimal API.These technologies are new to me, but I enjoyed experimenting and learning them. The frontend is built with React using Typescript.
+This is a simple web poll application where users can vote and create polls. The Backend is built with .NET Core Web API, using Dapper, SQL Server database and Minimal API. These technologies were quite new to me, but I enjoyed experimenting and learning them. The frontend is built with React using Typescript.
 
 ## Running the Backend
 
